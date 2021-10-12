@@ -1,6 +1,6 @@
 public class Blob {
   private PVector pos, acc, vel;
-  private int hp = 25, energy = 50, speed = 50;
+  private int hp = 25, energy = 50, speed = 5;
   private final color COLOR = color(95, 190, 227);
   private final int SIZE = 20;
   public int collisions = 0;
@@ -36,4 +36,8 @@ public class Blob {
       collisions++;
     }
   }
+ private void eat(Mango f){
+ if(dist(pos.x,pos.y, f.pos.x, f.pos.y)<1)
+   f.active = false;
+ }
 }

@@ -1,7 +1,7 @@
-public class Mango implements Food {
+public class Mango /*implements Food*/ {
   public PVector pos;
   public final int SIZE = 10;
-  public final color COLOR = color(0, 200, 30);
+  public final color COLOR = color(250, 150, 30);
   public int health = (int)random(1, 5);
   public boolean active = true;
 
