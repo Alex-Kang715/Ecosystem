@@ -1,9 +1,11 @@
 public class Blob {
   private PVector pos, acc, vel;
-  private int hp = 25, energy = 50, speed = 5;
+  private int hp = 25, speed = 1;
+  private float  energy = 1000;
   private final color COLOR = color(95, 190, 227);
   private final int SIZE = 20;
-  public int collisions = 0;
+  public int collisions = 0, eaten = 0;
+  public boolean alive = true;
 
   public Blob(int x, int y) {
     pos = new PVector(x, y);
@@ -16,6 +18,13 @@ public class Blob {
   private void move() {
     vel = PVector.random2D().mult(speed);
     pos.add(vel);
+    energy -= 0.1;
+  }
+
+  private void die() {
+    if (energy <= 0) {
+      this.alive=false;
+    }
   }
 
   private void collideWorldBounds() {
@@ -36,8 +45,15 @@ public class Blob {
       collisions++;
     }
   }
- private void eat(Mango f){
- if(dist(pos.x,pos.y, f.pos.x, f.pos.y)<1)
-   f.active = false;
- }
+  private void eat(Mango f) {
+    double dist = PVector.sub(pos, f.pos).mag();
+    if (dist<SIZE/2 + f.SIZE/2) {
+      f.active = false;
+      eaten ++;
+      energy += 100;
+    
+    Mango b = new Mango((int)(Math.random()*(width-2*MARGIN) + MARGIN), (int)(Math.random()*(height-2*MARGIN))+MARGIN);
+     mangos.add(b);}
+    println(dist(pos.x, pos.y, f.pos.x, f.pos.y));
+  }
 }
