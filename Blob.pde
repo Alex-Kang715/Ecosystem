@@ -1,6 +1,6 @@
 public class Blob {
   private PVector pos, acc, vel;
-  private int hp = 25, speed = 1;
+  private int hp = 25, speed = 5;
   private float  energy = 1000;
   private final color COLOR = color(95, 190, 227);
   private final int SIZE = 20;
@@ -51,9 +51,22 @@ public class Blob {
       f.active = false;
       eaten ++;
       energy += 100;
-    
-    Mango b = new Mango((int)(Math.random()*(width-2*MARGIN) + MARGIN), (int)(Math.random()*(height-2*MARGIN))+MARGIN);
-     mangos.add(b);}
-    println(dist(pos.x, pos.y, f.pos.x, f.pos.y));
+      Mango b = new Mango((int)(Math.random()*(width-2*MARGIN) + MARGIN), (int)(Math.random()*(height-2*MARGIN))+MARGIN);
+      mangos.add(b);
+    }
+  }
+
+  private int NearestFood(ArrayList <Mango> f) {
+    int currentMin = 100000;
+    int indexMin = -1;
+    for (int i = 0; i<f.size(); i++) {
+      float dist = PVector.sub(pos, f.get(i).pos).mag();
+
+      if (dist<=currentMin) {
+        currentMin = (int)dist;
+        indexMin = i;
+      }
+    }
+    return indexMin;
   }
 }
