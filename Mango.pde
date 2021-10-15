@@ -1,3 +1,4 @@
+
 public class Mango /*implements Food*/ {
   public PVector pos;
   public final int SIZE = 10;
